@@ -2,13 +2,11 @@
 The Catch2 demo help to test your c++ code.
 
 
-### C/C++ 開發工具與環境配置
-
-:::info
+C/C++ 開發工具與環境配置
+---
 - OS          : Windows10 ver.20H2
 - IDE         : VSCode
 - C/C++ Tools : Mingw-w64、Cmake、vcpkg、MSBuild
-:::
 
 Windows 環境變數配置
 ---
@@ -24,14 +22,17 @@ Windows 環境變數配置
 [MinGW-w64]((https://sourceforge.net/projects/mingw-w64/))
 ---
 
-MinGW-w64 是一個完整的 gcc runtime，用於支持 Windows 64 位和 32 位操作系統的原生二進製文件。由於個人電腦為Windows，所以我採用 ```MinGW-W64 GCC-8.1.0 [x86_64-posix-seh]``` ，經過本人測試，確定可以使用於 win10-20H2
+MinGW-w64 是一個完整的 gcc runtime，用於支持 Windows 64 位和 32 位操作系統的原生二進製文件。
 
+由於個人所用的電腦系統為Windows，所以我採用 ```MinGW-W64 GCC-8.1.0 [x86_64-posix-seh]```
+
+經過本人測試確定可以使用於 win10-20H2
 
 
 [Vcpkg](https://vcpkg.io/en/getting-started.html)
 ---
 
-vcpkg 為 C/C++函式庫(libraries)管理工具。在vscode時需要一些配置。
+vcpkg 為 C/C++函式庫(libraries)管理工具。
 
 ### 下載安裝vcpkg
 
@@ -51,17 +52,18 @@ VCPKG_DEFAULT_TRIPLET=x64-windows
 
 VSCode
 ---
+由於本次demo將採用vscode並配合vcpkg來使用，
 
-### 下載 Extension : [C/C++] From Microsoft
-![](https://i.imgur.com/PDxwTQW.png)
+若想使用經由vcpkg下載的C/C++函式庫，仍需要對vscode進行以下配置。
 
 ### 配置 vscode user settings
 
 - CMAKE_TOOLCHAIN_FILE
-仰賴CMake來幫我們找到他們，如使用find_package()功能。
+該變量為```.cmake```文件位置。 ```.cmake```文件包含CMake工具鏈(toolchain)的配置訊息，為配合vcpkg使用必須指定為```vcpkg.cmake```。
 
 - C_Cpp.default.includePath
-這是vcpkg會幫我們管理下載下來的第三方庫，以```x64-windows```的包為例，就會被放在```vcpkg\installed\x64-windows\include\```下，而這裡配置便是要提供vscode資訊來如找到 c/c++庫。
+該變量為C/C++函式庫所在位置。由vcpkg下載的c/c++庫，若其後綴為```:x64-windows```，則將被集中於```vcpkg\installed\x64-windows\include\```目錄下。
+
 
 ```json=
 {
@@ -76,9 +78,9 @@ VSCode
 }
 ```
 
+
 [CMake](https://cmake.org/download/)
 ---
-
 CMake 可以生成跨平台通用的專案腳本CMakeLists.txt。原理上CMake根據CMakeLists.txt在當前平台才開始編譯，並產生對應當前平台的工具鏈，若為 Windows 64 位元的版本，至官網上擇一下載安裝即可。
 
 |Platform | Files|
@@ -105,7 +107,6 @@ CMake 可以生成跨平台通用的專案腳本CMakeLists.txt。原理上CMake�
 
 Catch2
 ---
-
 Catch2 is mainly a unit testing framework for C++, but it also provides basic micro-benchmarking features, and simple BDD macros.
 
 ### 透過vcpkg下載Catch2
